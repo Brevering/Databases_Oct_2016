@@ -39,10 +39,26 @@
                         <xs:sequence>
                           <xs:element name="examName" type="xs:string" />
                           <xs:element name="tutor" type="xs:string" />
-                          <xs:element name="score" type="xs:unsignedByte" />
+                          <xs:element name="score" type="xs:double" />
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="enrollment" maxOccurs="1" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="enrollment-date" type="xs:date"></xs:element>
+                      <xs:element name="exam-score" type="xs:double"></xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="teacher-endorsments">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="teacher-name" type="xs:string" />
+                    <xs:element name="teacher-endorsement" type="xs:string" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
