@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:students="students.urn" 
-           attributeFormDefault="unqualified" 
-           elementFormDefault="qualified" 
-           xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
-  <xs:simpleType name="email">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="[^@]+@[^\.]+\..+"/>
-    </xs:restriction>
-  </xs:simpleType>
-  
+<xs:schema xmlns:students="urn:students" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="students">
     <xs:complexType>
       <xs:sequence>
@@ -39,26 +29,32 @@
                         <xs:sequence>
                           <xs:element name="examName" type="xs:string" />
                           <xs:element name="tutor" type="xs:string" />
-                          <xs:element name="score" type="xs:double" />
+                          <xs:element name="score" type="xs:decimal" />
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="enrollment" maxOccurs="1" minOccurs="0">
+              <xs:element maxOccurs="1" minOccurs="0" name="enrollment">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="enrollment-date" type="xs:date"></xs:element>
-                      <xs:element name="exam-score" type="xs:double"></xs:element>
+                    <xs:element name="enrollment-date" type="xs:date" />
+                    <xs:element name="exam-score" type="xs:decimal" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element minOccurs="0" name="teacher-endorsments">
+              <xs:element name="endorsements">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="teacher-name" type="xs:string" />
-                    <xs:element name="teacher-endorsement" type="xs:string" />
+                    <xs:element name="endorsement">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="teacher-name" type="xs:string" />
+                          <xs:element name="teacher-endorsement" type="xs:string" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>

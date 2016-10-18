@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="studentsSample.xslt"?>
+
+<students xmlns:students="urn:students">
+  <student>
+    <name>
+      <firstName>Pesho</firstName>
+      <lastName>Ivanov</lastName>
+    </name>
+    <sex>Male</sex>
+    <birthdate>1999-01-13</birthdate>
+    <phone>0888222333</phone>
+    <email>peshoivanov@abv.bg</email>
+    <course>3</course>
+    <specialty>Mathematics</specialty>
+    <facultyNumber>7623456</facultyNumber>
+    <exams>
+      <exam>
+        <examName>Trigonometry</examName>
+        <tutor>Georgi Georgiev</tutor>
+        <score>4.5</score>
+      </exam>
+      <exam>
+        <examName>Geometry</examName>
+        <tutor>Stamat Stamatov</tutor>
+        <score>3</score>
+      </exam>
+    </exams>
+    <enrollment>
+      <enrollment-date>2016-09-01</enrollment-date>
+      <exam-score>4.75</exam-score>
+    </enrollment>
+    <endorsements>
+      <endorsement>
+        <teacher-name>Stamat Stamatov</teacher-name>
+        <teacher-endorsement>Not too bright</teacher-endorsement>
+      </endorsement>
+    </endorsements>
+  </student>
+  <student>
+    <name>
+      <firstName>Maria</firstName>
+      <lastName>Petrova</lastName>
+    </name>
+    <sex>Female</sex>
+    <birthdate>2001-05-12</birthdate>
+    <phone>0899111333</phone>
+    <email>mimi_p@gmail.com</email>
+    <course>2</course>
+    <specialty>Economics</specialty>
+    <facultyNumber>4294967</facultyNumber>
+    <exams>
+      <exam>
+        <examName>Statistics</examName>
+        <tutor>Ivan Ivanov</tutor>
+        <score>6</score>
+      </exam>
+      <exam>
+        <examName>Microeconomics</examName>
+        <tutor>Ivan Petrov</tutor>
+        <score>4.75</score>
+      </exam>
+      <exam>
+        <examName>Macroeconomics</examName>
+        <tutor>Ivan Petrov</tutor>
+        <score>5</score>
+      </exam>
+    </exams>
+    <enrollment>
+      <enrollment-date>2016-10-05</enrollment-date>
+      <exam-score>5.5</exam-score>
+    </enrollment>
+    <endorsements>
+      <endorsement>
+        <teacher-name>Ivan Petrov</teacher-name>
+        <teacher-endorsement>Diligent</teacher-endorsement>
+      </endorsement>
+    </endorsements>
+  </student>
+  <student>
+    <name>
+      <firstName>Gosho</firstName>
+      <lastName>Petrov</lastName>
+    </name>
+    <sex>Yes please</sex>
+    <birthdate>2005-07-13</birthdate>
+    <phone>0899555333</phone>
+    <email>goshoSexa@gmail.com</email>
+    <course>1</course>
+    <specialty>IT</specialty>
+    <facultyNumber>4333337</facultyNumber>
+    <exams>
+      <exam>
+        <examName>HTML basics</examName>
+        <tutor>Ivan Minchev</tutor>
+        <score>6</score>
+      </exam>
+      <exam>
+        <examName>JavaScript</examName>
+        <tutor>Pesho Georgiev</tutor>
+        <score>4.5</score>
+      </exam>
+      <exam>
+        <examName>Databases</examName>
+        <tutor>Ivan Ivanov</tutor>
+        <score>3.5</score>
+      </exam>
+    </exams>
+    <enrollment>
+      <enrollment-date>2015-09-15</enrollment-date>
+      <exam-score>5</exam-score>
+    </enrollment>
+    <endorsements>
+      <endorsement>
+        <teacher-name>Ivan Ivanov</teacher-name>
+        <teacher-endorsement>Crazy as can be</teacher-endorsement>
+      </endorsement>
+    </endorsements>
+  </student>
+</students>
