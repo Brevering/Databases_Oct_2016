@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace XMLProcessingHW
 {
     class XMLProcessingEntrypoint
     {
         private const string PathToXmlFile = "../../Files/catalogue.xml";
+        private const string PathToTxtFile = "../../Files/phonebook.txt";
 
         static void Main()
         {
@@ -23,12 +26,29 @@ namespace XMLProcessingHW
             //  Use the DOM parser and a hash - table. 
             PrintAlbumsForEachArtist(rootNode);
 
-            //Problem 3: Implement the previous using XPath.
+            // Problem 3: Implement the previous using XPath.
             PrintAlbumsForEachArtistUsingXPath(rootNode);
 
-            //Problem 4: Using the DOM parser write a program to delete from catalog.xml all albums having price > 20.
+            // Problem 4: Using the DOM parser write a program to delete from catalog.xml all albums having price > 20.
             DeleteAlbumsByPrice(rootNode, 20);
-            doc.Save("../../Files/catalogueNew.xml");
+            doc.Save("../../Files/catalogueNew.xml"); //bonus: save the new xml ;)
+
+            // Problem 5: Write a program, which using XmlReader extracts all song titles from catalog.xml
+            Console.WriteLine("All song titles in catalogue are:"
+                                + Environment.NewLine
+                                + string.Join(", ", ReturnSongTitles(PathToXmlFile).ToArray()));
+            Console.WriteLine(new string('-', 50));
+
+            // Problem 6: Rewrite the same using XDocument and LINQ query
+            Console.WriteLine("All song titles in catalogue extracted with LINQ are:"
+                                + Environment.NewLine
+                                + string.Join(", ", ReturnSongTitlesWithLINQ(PathToXmlFile).ToArray()));
+            Console.WriteLine(new string('-', 50));
+
+            // Problem 7: In a text file we are given the name, address and phone number of given person (each at a single line).
+            //  Write a program, which creates new XML document, which contains these data in structured XML format.
+                        CreateXmlPhonebook(PathToTxtFile);
+
         }
 
         private static void PrintAlbumsForEachArtist(XmlNode root)
@@ -114,6 +134,78 @@ namespace XMLProcessingHW
 
             Console.WriteLine($"{deletedCount} albums with price over {minPrice} deleted!");
             Console.WriteLine(new string('-', 50));
+        }
+
+        private static List<string> ReturnSongTitles(string pathToFile)
+        {
+            var titles = new List<string>();
+
+            using (XmlReader reader = XmlReader.Create(pathToFile))
+            {
+                while (reader.Read())
+                {
+                    if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "title"))
+                    {
+                        titles.Add(reader.ReadElementString().Trim());
+                    }
+                }
+            }
+
+            return titles;
+        }
+
+        private static List<string> ReturnSongTitlesWithLINQ(string pathToFile)
+        {
+            var titlesList = new List<string>();
+
+            XDocument xmlDoc = XDocument.Load(pathToFile);
+            var titles =
+                from title in xmlDoc.Descendants("title")
+                select title.Value.Trim();
+            foreach (var item in titles)
+            {
+                titlesList.Add(item);
+            }
+
+            return titlesList;
+        }
+
+        private static void CreateXmlPhonebook(string pathToPhonebook)
+        {
+            int counter = 0;
+
+            var writer = new XmlTextWriter("../../Files/phonebook.xml", Encoding.UTF8);
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartDocument();
+            writer.WriteStartElement("entries");
+
+            using (var reader = new StreamReader(pathToPhonebook))
+            {
+                while (!reader.EndOfStream)
+                {
+                    switch (counter % 3)
+                    {
+                        case 0:
+                            writer.WriteStartElement("entry");
+                            writer.WriteElementString("name", reader.ReadLine());
+                            break;
+                        case 1:
+                            writer.WriteElementString("address", reader.ReadLine());
+                            break;
+                        case 2:
+                            writer.WriteElementString("phone", reader.ReadLine());
+                            writer.WriteEndElement();                            
+                            break;
+                    }
+
+                    counter++;
+                }
+            }
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
+            writer.Dispose();
         }
     }
 }
