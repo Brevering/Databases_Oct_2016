@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<albums>
+  <album>
+    <name>
+      Kill'em all
+    </name>
+    <artist>
+      Metallica
+    </artist>
+  </album>
+  <album>
+    <name>
+      Ride The Lightning
+    </name>
+    <artist>
+      Metallica
+    </artist>
+  </album>
+  <album>
+    <name>
+      Master of Puppets
+    </name>
+    <artist>
+      Metallica
+    </artist>
+  </album>
+  <album>
+    <name>
+      Iron Maiden
+    </name>
+    <artist>
+      Iron Maiden
+    </artist>
+  </album>
+  <album>
+    <name>
+      Killers
+    </name>
+    <artist>
+      Iron Maiden
+    </artist>
+  </album>
+  <album>
+    <name>
+      The Number of the Beast
+    </name>
+    <artist>
+      Iron Maiden
+    </artist>
+  </album>
+  <album>
+    <name>
+      Raw Power
+    </name>
+    <artist>
+      Iggy Pop
+    </artist>
+  </album>
+  <album>
+    <name>
+      Lust for Life
+    </name>
+    <artist>
+      Iggy Pop
+    </artist>
+  </album>
+</albums>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Directory Name="bin">
+    <Directory Name="Debug">
+      <File Name="XMLProcessingHW.exe" Size="12288" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.exe.config" Size="189" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.pdb" Size="19968" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.vshost.exe" Size="22696" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.vshost.exe.config" Size="189" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.vshost.exe.manifest" Size="490" Modified="4.6.2015 г." />
+    </Directory>
+  </Directory>
+  <Directory Name="Files">
+    <File Name="albums.xml" Size="959" Modified="21.10.2016 г." />
+    <File Name="catalogue.xml" Size="12465" Modified="21.10.2016 г." />
+    <File Name="catalogue.xsd" Size="1439" Modified="21.10.2016 г." />
+    <File Name="catalogueNew.xml" Size="6167" Modified="21.10.2016 г." />
+    <File Name="phonebook.txt" Size="193" Modified="21.10.2016 г." />
+    <File Name="phonebook.xml" Size="669" Modified="21.10.2016 г." />
+    <File Name="traverseWithXmlWriter.xml" Size="618" Modified="21.10.2016 г." />
+  </Directory>
+  <Directory Name="obj">
+    <Directory Name="Debug">
+      <Directory Name="TempPE" />
+      <File Name="DesignTimeResolveAssemblyReferencesInput.cache" Size="7167" Modified="21.10.2016 г." />
+      <File Name="TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" Size="0" Modified="21.10.2016 г." />
+      <File Name="TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" Size="0" Modified="21.10.2016 г." />
+      <File Name="TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" Size="0" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.csproj.FileListAbsolute.txt" Size="994" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.csprojResolveAssemblyReference.cache" Size="1922" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.exe" Size="12288" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.pdb" Size="19968" Modified="21.10.2016 г." />
+    </Directory>
+  </Directory>
+  <Directory Name="Properties">
+    <File Name="AssemblyInfo.cs" Size="1472" Modified="21.10.2016 г." />
+  </Directory>
+  <File Name="App.config" Size="189" Modified="21.10.2016 г." />
+  <File Name="XMLProcessingEntrypoint.cs" Size="11864" Modified="21.10.2016 г." />
+  <File Name="XMLProcessingHW.csproj" Size="2801" Modified="21.10.2016 г." />
+</Root>

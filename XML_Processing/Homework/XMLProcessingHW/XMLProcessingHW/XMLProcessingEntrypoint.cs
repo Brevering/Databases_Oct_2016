@@ -12,8 +12,8 @@ namespace XMLProcessingHW
 {
     class XMLProcessingEntrypoint
     {
-        private const string PathToXmlFile = "../../Files/catalogue.xml";
-        private const string PathToTxtFile = "../../Files/phonebook.txt";
+        private const string PathToXmlFile = "../../../Files/catalogue.xml";
+        private const string PathToTxtFile = "../../../Files/phonebook.txt";
 
         static void Main()
         {
@@ -31,7 +31,7 @@ namespace XMLProcessingHW
 
             // Problem 4: Using the DOM parser write a program to delete from catalog.xml all albums having price > 20.
             DeleteAlbumsByPrice(rootNode, 20);
-            doc.Save("../../Files/catalogueNew.xml"); //bonus: save the new xml ;)
+            doc.Save("../../../Files/catalogueNew.xml"); //bonus: save the new xml ;)
 
             // Problem 5: Write a program, which using XmlReader extracts all song titles from catalog.xml
             Console.WriteLine("All song titles in catalogue are:"
@@ -47,7 +47,33 @@ namespace XMLProcessingHW
 
             // Problem 7: In a text file we are given the name, address and phone number of given person (each at a single line).
             //  Write a program, which creates new XML document, which contains these data in structured XML format.
-                        CreateXmlPhonebook(PathToTxtFile);
+            CreateXmlPhonebook(PathToTxtFile);
+            Console.WriteLine("File phonebook.xml is created in Files folder from file phonebook.txt");
+            Console.WriteLine(new string('-', 50));
+
+            // Problem 8: Write a program, which (using XmlReader and XmlWriter) reads the file catalog.xml and creates the file 
+            // album.xml, in which stores in appropriate way the names of all albums and their authors.
+            CreateXmlAlbumsFileFromCatalogue(PathToXmlFile);
+            Console.WriteLine("File albums.xml is created in Files folder from file catalogue.xml");
+            Console.WriteLine(new string('-', 50));
+
+            // Problem 9: Write a program to traverse given directory and write to a XML file its contents together with all subdirectories and files.
+            // Use tags < file > and < dir > with appropriate attributes.
+            // For the generation of the XML document use the class XmlWriter.
+            using (var writer = new XmlTextWriter("../../../Files/traverseWithXmlWriter.xml", Encoding.UTF8))
+            {
+                writer.Formatting = Formatting.Indented;                
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Root");
+                TraverseDirectoryWithXmlWriter("../../", writer);
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+                writer.Close();
+                writer.Dispose();
+            }
+            Console.WriteLine("File traverseWithXmlWriter.xml is created in Files folder");
+            Console.WriteLine(new string('-', 50));
+
 
         }
 
@@ -174,7 +200,7 @@ namespace XMLProcessingHW
         {
             int counter = 0;
 
-            var writer = new XmlTextWriter("../../Files/phonebook.xml", Encoding.UTF8);
+            var writer = new XmlTextWriter("../../../Files/phonebook.xml", Encoding.UTF8);
             writer.Formatting = Formatting.Indented;
             writer.WriteStartDocument();
             writer.WriteStartElement("entries");
@@ -206,6 +232,70 @@ namespace XMLProcessingHW
             writer.WriteEndDocument();
             writer.Close();
             writer.Dispose();
+        }
+
+        private static void CreateXmlAlbumsFileFromCatalogue(string pathToOriginFile)
+        {
+            var writer = new XmlTextWriter("../../../Files/albums.xml", Encoding.UTF8);
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartDocument();
+            writer.WriteStartElement("albums");
+
+            using (var reader = XmlReader.Create(pathToOriginFile))
+            {
+                while (reader.Read())
+                {
+                    switch (reader.Name)
+                    {
+                        case "album":
+                            if (reader.IsStartElement())
+                            {
+                                writer.WriteStartElement("album");
+                            }
+                            break;
+                        case "name":
+                            writer.WriteElementString("name", reader.ReadElementContentAsString());
+                            break;
+                        case "artist":
+                            writer.WriteElementString("artist", reader.ReadElementContentAsString());
+                            writer.WriteEndElement();
+                            break;
+                    }
+                }
+            }
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
+            writer.Dispose();
+        }
+
+        private static void TraverseDirectoryWithXmlWriter(string rootDirectory, XmlWriter writer)
+        {
+            var directoryInfo = new DirectoryInfo(rootDirectory);
+            var folders = directoryInfo.GetDirectories();
+
+            foreach (var folder in folders)
+            {
+                writer.WriteStartElement("Directory");
+                writer.WriteAttributeString("Name", folder.Name);
+                TraverseDirectoryWithXmlWriter(folder.FullName, writer);
+                writer.WriteEndElement();
+            }
+
+            var files = directoryInfo.GetFiles();
+
+            foreach (var file in files)
+            {
+                writer.WriteStartElement("File");
+                writer.WriteAttributeString("Name", file.Name);
+                writer.WriteAttributeString("Size", file.Length.ToString());
+                writer.WriteAttributeString("Modified", file.LastWriteTimeUtc.Date.ToShortDateString());
+                writer.WriteEndElement();
+            }
+
+
+
         }
     }
 }
