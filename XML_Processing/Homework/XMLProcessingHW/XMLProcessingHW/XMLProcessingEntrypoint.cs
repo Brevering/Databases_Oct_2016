@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Schema;
 using System.Xml.Xsl;
 
 namespace XMLProcessingHW
@@ -102,6 +102,16 @@ namespace XMLProcessingHW
             XslCompiledTransform catalogueXslt = new XslCompiledTransform();
             catalogueXslt.Load("../../../Files/catalogue.xslt");
             catalogueXslt.Transform(PathToXmlFile, "../../../Files/catalogue.html");
+
+            // Problem 15 - with a star
+            // TODO - see later if time
+
+            // Problem 16:
+            // Using Visual Studio generate an XSD schema for the file catalog.xml.
+            // Write a C# program that takes an XML file and an XSD file (schema) and validates the XML file against the schema.
+            // Test it with valid XML catalogs and invalid XML catalogs.
+            ValidateXmlAgainstSchema(PathToXmlFile, "../../../Files/catalogue.xsd"); // validating a valid file
+            ValidateXmlAgainstSchema("../../../Files/albums.xml", "../../../Files/catalogue.xsd"); // validating an invalid file
         }
 
 
@@ -343,10 +353,10 @@ namespace XMLProcessingHW
 
         private static void ListPricesOfAlbumsOlderThanWithXPath(XmlNode root, int year)
         {
-            var result = root.SelectNodes("album / price[../ year / text() < "+ year+"]");
+            var result = root.SelectNodes("album / price[../ year / text() < " + year + "]");
             Console.WriteLine($"The prices of albums published before {year} are:");
             foreach (var price in result)
-            {           
+            {
                 Console.WriteLine((price as XmlElement).InnerXml.Trim());
             }
 
@@ -368,6 +378,26 @@ namespace XMLProcessingHW
                 Console.WriteLine(price.Value.Trim());
             }
 
+            Console.WriteLine(new string('-', 50));
+        }
+
+        private static void ValidateXmlAgainstSchema(string xmlSource, string schemaSource)
+        {
+            string xsdFile = File.ReadAllText(schemaSource);
+
+            XmlSchemaSet schemas = new XmlSchemaSet();
+            schemas.Add(null, XmlReader.Create(new StringReader(xsdFile)));
+
+            XDocument documentToValidate = XDocument.Load(xmlSource);
+
+            bool errors = false;
+
+            documentToValidate.Validate(schemas, (o, e) =>
+            {
+                Console.WriteLine("{0}", e.Message);
+                errors = true;
+            });
+            Console.WriteLine("The document {0}", errors ? "did not validate" : "validated");
             Console.WriteLine(new string('-', 50));
         }
     }

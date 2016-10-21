@@ -2,7 +2,7 @@
 <Root>
   <Directory Name="bin">
     <Directory Name="Debug">
-      <File Name="XMLProcessingHW.exe" Size="15360" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.exe" Size="15872" Modified="21.10.2016 г." />
       <File Name="XMLProcessingHW.exe.config" Size="189" Modified="21.10.2016 г." />
       <File Name="XMLProcessingHW.pdb" Size="24064" Modified="21.10.2016 г." />
       <File Name="XMLProcessingHW.vshost.exe" Size="22696" Modified="21.10.2016 г." />
@@ -19,7 +19,7 @@
       <File Name="TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" Size="0" Modified="21.10.2016 г." />
       <File Name="XMLProcessingHW.csproj.FileListAbsolute.txt" Size="994" Modified="21.10.2016 г." />
       <File Name="XMLProcessingHW.csprojResolveAssemblyReference.cache" Size="1922" Modified="21.10.2016 г." />
-      <File Name="XMLProcessingHW.exe" Size="15360" Modified="21.10.2016 г." />
+      <File Name="XMLProcessingHW.exe" Size="15872" Modified="21.10.2016 г." />
       <File Name="XMLProcessingHW.pdb" Size="24064" Modified="21.10.2016 г." />
     </Directory>
   </Directory>
@@ -27,6 +27,6 @@
     <File Name="AssemblyInfo.cs" Size="1472" Modified="21.10.2016 г." />
   </Directory>
   <File Name="App.config" Size="189" Modified="21.10.2016 г." />
-  <File Name="XMLProcessingEntrypoint.cs" Size="16006" Modified="21.10.2016 г." />
+  <File Name="XMLProcessingEntrypoint.cs" Size="17390" Modified="21.10.2016 г." />
   <File Name="XMLProcessingHW.csproj" Size="2801" Modified="21.10.2016 г." />
 </Root>
