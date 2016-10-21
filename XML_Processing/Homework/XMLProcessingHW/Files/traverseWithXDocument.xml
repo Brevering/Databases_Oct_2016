@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root>
+<Directory Name="XMLProcessingHW">
   <Directory Name="bin">
     <Directory Name="Debug">
       <File Name="XMLProcessingHW.exe" Size="15360" Modified="21.10.2016 г." />
@@ -29,4 +29,4 @@
   <File Name="App.config" Size="189" Modified="21.10.2016 г." />
   <File Name="XMLProcessingEntrypoint.cs" Size="16006" Modified="21.10.2016 г." />
   <File Name="XMLProcessingHW.csproj" Size="2801" Modified="21.10.2016 г." />
-</Root>
+</Directory>

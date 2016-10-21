@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Xsl;
 
 namespace XMLProcessingHW
 {
@@ -62,10 +63,10 @@ namespace XMLProcessingHW
             // For the generation of the XML document use the class XmlWriter.
             using (var writer = new XmlTextWriter("../../../Files/traverseWithXmlWriter.xml", Encoding.UTF8))
             {
-                writer.Formatting = Formatting.Indented;                
+                writer.Formatting = Formatting.Indented;
                 writer.WriteStartDocument();
                 writer.WriteStartElement("Root");
-                TraverseDirectoryWithXmlWriter("../../", writer);
+                TraverseDirectoryWithXmlWriter("../../", writer); //this reads two levels up. You can substitute with any valid path
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
                 writer.Close();
@@ -74,8 +75,35 @@ namespace XMLProcessingHW
             Console.WriteLine("File traverseWithXmlWriter.xml is created in Files folder");
             Console.WriteLine(new string('-', 50));
 
+            // Problem 10: Rewrite the last exercises using XDocument, XElement and XAttribute.
+            var xDocument = new XDocument();
+            xDocument.Add(TraverseDirectoryWithXDocument("../../"));
+            xDocument.Save("../../../Files/traverseWithXDocument.xml");
 
+            Console.WriteLine("File traverseWithXDocument.xml is created in Files folder");
+            Console.WriteLine(new string('-', 50));
+
+            // Problem 11: Write a program, which extract from the file catalog.xml the prices for all albums, published 5 years ago or earlier.
+            // Use XPath query.
+            XmlDocument doc2 = new XmlDocument();
+            doc.Load("../../../Files/catalogue.xml");
+            XmlNode root = doc.DocumentElement;
+            ListPricesOfAlbumsOlderThanWithXPath(root, 2011);
+            ListPricesOfAlbumsOlderThanWithXPath(root, 1983); //to demonstrate it does work, for all albums are older than five years...
+
+            // Problem 12: Rewrite the previous using LINQ query.
+            ListPricesOfAlbumsOlderThanWithLINQ(PathToXmlFile, 2011);
+            ListPricesOfAlbumsOlderThanWithLINQ(PathToXmlFile, 1980);
+
+            // Problem 13: Create an XSL stylesheet, which transforms the file catalog.xml into HTML document,
+            // formatted for viewing in a standard Web-browser.
+            // Problem 14: Write a C# program to apply the XSLT stylesheet transformation on the file catalog.xml
+            // using the class XslTransform.
+            XslCompiledTransform catalogueXslt = new XslCompiledTransform();
+            catalogueXslt.Load("../../../Files/catalogue.xslt");
+            catalogueXslt.Transform(PathToXmlFile, "../../../Files/catalogue.html");
         }
+
 
         private static void PrintAlbumsForEachArtist(XmlNode root)
         {
@@ -220,7 +248,7 @@ namespace XMLProcessingHW
                             break;
                         case 2:
                             writer.WriteElementString("phone", reader.ReadLine());
-                            writer.WriteEndElement();                            
+                            writer.WriteEndElement();
                             break;
                     }
 
@@ -296,6 +324,51 @@ namespace XMLProcessingHW
 
 
 
+        }
+
+        private static XElement TraverseDirectoryWithXDocument(string source)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(source);
+            var result = new XElement(
+                        "Directory",
+                        new XAttribute("Name", directoryInfo.Name),
+                        Directory.GetDirectories(source).Select(dir => TraverseDirectoryWithXDocument(dir)),
+                        directoryInfo.GetFiles().Select(file => new XElement(
+                                                                            "File",
+                                                                            new XAttribute("Name", file.Name),
+                                                                            new XAttribute("Size", file.Length),
+                                                                            new XAttribute("Modified", file.LastWriteTimeUtc.Date.ToShortDateString()))));
+            return result;
+        }
+
+        private static void ListPricesOfAlbumsOlderThanWithXPath(XmlNode root, int year)
+        {
+            var result = root.SelectNodes("album / price[../ year / text() < "+ year+"]");
+            Console.WriteLine($"The prices of albums published before {year} are:");
+            foreach (var price in result)
+            {           
+                Console.WriteLine((price as XmlElement).InnerXml.Trim());
+            }
+
+            Console.WriteLine(new string('-', 50));
+        }
+
+        private static void ListPricesOfAlbumsOlderThanWithLINQ(string pathToFile, int year)
+        {
+            XDocument xmlDoc = XDocument.Load(pathToFile);
+
+            var oldAlbumsPricesUsingLinq = from album in xmlDoc.Descendants("album")
+                                           where int.Parse(album.Element("year").Value) < year
+                                           select album.Descendants("price").FirstOrDefault();
+            Console.WriteLine("--------------------using LINQ--------------------");
+            Console.WriteLine($"The prices of albums published before {year} are:");
+
+            foreach (var price in oldAlbumsPricesUsingLinq)
+            {
+                Console.WriteLine(price.Value.Trim());
+            }
+
+            Console.WriteLine(new string('-', 50));
         }
     }
 }
