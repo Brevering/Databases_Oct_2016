@@ -10,6 +10,7 @@
       <File Name="XMLProcessingHW.vshost.exe.manifest" Size="490" Modified="4.6.2015 г." />
     </Directory>
   </Directory>
+  <Directory Name="Files" />
   <Directory Name="obj">
     <Directory Name="Debug">
       <Directory Name="TempPE" />
